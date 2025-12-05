@@ -1,38 +1,96 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* General layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  background-attachment: fixed;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Search Box */
+.search-box {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  width: 250px;
+  padding: 12px 15px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn.primary {
+  background: #2d3436;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #636e72;
+}
+
+.btn.secondary {
+  background: #00cec9;
+  color: black;
+}
+
+.btn.secondary:hover {
+  background: #55efc4;
+}
+
+/* Output card */
+.card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 25px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.weather-icon {
+  width: 100px;
+}
+
+.desc {
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+
+/* Messages */
+.error {
+  color: #ff7675;
+  font-weight: bold;
+}
+
+.loading {
+  font-size: 1.2rem;
 }
