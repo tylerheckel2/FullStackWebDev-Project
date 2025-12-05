@@ -1,2 +1,0 @@
-# FullStackWebDev-Project
-
