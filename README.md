@@ -1,4 +1,4 @@
-To run this while developing, run "node server.js" from backend terminal and run "npm start" from src terminal.
+# To run this while developing, run "node server.js" from backend terminal and run "npm start" from src terminal.
 
 # Getting Started with Create React App
 
