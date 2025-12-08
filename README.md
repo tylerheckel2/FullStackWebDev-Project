@@ -1,3 +1,5 @@
+To run this while developing, run "node server.js" from backend terminal and run "npm start" from src terminal.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
