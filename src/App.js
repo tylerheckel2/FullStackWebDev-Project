@@ -9,6 +9,10 @@ const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 function WeatherCard({ weather, favorites, setFavorites }) {
   const { user } = useContext(AuthContext);
 
+  const matchCity = cities.find(c => c.id === weather.id);
+  const state = matchCity?.state || "";
+  const coord = matchCity?.coord || { lat: weather.coord?.lat, lon: weather.coord?.lon };
+
   const addFavorite = async () => {
     if (!user) return alert("Log in to save favorites");
     const token = localStorage.getItem("token");
@@ -16,9 +20,12 @@ function WeatherCard({ weather, favorites, setFavorites }) {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-auth-token": token },
       body: JSON.stringify({
+        cityId: weather.id,
         city: weather.name,
+        state,
         country: weather.sys.country,
-        weatherData: weather,
+        coord,
+        weatherData: weather
       }),
     });
     const data = await res.json();
@@ -28,7 +35,7 @@ function WeatherCard({ weather, favorites, setFavorites }) {
   const removeFavorite = async () => {
   const token = localStorage.getItem("token");
   const res = await fetch(
-    `http://localhost:5000/api/favorites/${weather.name}?country=${weather.sys.country}`,
+    `http://localhost:5000/api/favorites/${weather.id}`,
     {
       method: "DELETE",
       headers: { "x-auth-token": token },
@@ -39,7 +46,7 @@ function WeatherCard({ weather, favorites, setFavorites }) {
 };
 
 
-  const isFavorite = favorites.some((f) => f.city === weather.name);
+  const isFavorite = favorites.some(f => f.cityId === weather.id);
 
   return (
     <div className="card fade-in">
@@ -116,7 +123,7 @@ function App() {
       const url = `${API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`;
 
       const response = await fetch(url);
-      if (!response.ok) throw new Error("City not found or API issue");
+      if (!response.ok) throw new Error("City not found");
 
       const data = await response.json();
       setWeather(data);

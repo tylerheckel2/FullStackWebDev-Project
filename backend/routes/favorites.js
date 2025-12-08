@@ -15,14 +15,18 @@ router.get("/", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
-    const { city, country, weatherData } = req.body;
-    const user = await User.findById(req.user.id);
-
-    if (!user.favorites.some((f) => f.city === city)) {
-      user.favorites.push({ city, country, weatherData });
-      await user.save();
+    const { cityId, city, state, country, coord, weatherData } = req.body;
+    
+    if (cityId == null) {
+      return res.status(400).json({ msg: "cityId is required" });
     }
 
+    const user = await User.findById(req.user.id);
+
+    if (!user.favorites.some(f => f.cityId === Number(cityId))) {
+      user.favorites.push({ cityId: Number(cityId), city, state, country, coord, weatherData });
+      await user.save();
+    }
     res.json(user.favorites);
   } catch (err) {
     console.error(err);
@@ -30,12 +34,12 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.delete("/:city", auth, async (req, res) => {
+router.delete("/:cityId", auth, async (req, res) => {
   try {
-    const { city } = req.params;
+    const cityId = Number(req.params.cityId);
     const user = await User.findById(req.user.id);
 
-    user.favorites = user.favorites.filter((f) => f.city !== city);
+    user.favorites = user.favorites.filter(f => f.cityId !== cityId);
     await user.save();
 
     res.json(user.favorites);
