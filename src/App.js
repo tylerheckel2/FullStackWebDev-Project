@@ -21,13 +21,8 @@ const isExactLocationInput = (q) => {
     `${c.name}, ${c.country}`.toLowerCase() === lower
   )) return true;
 
-  if (cities.some(c =>
-    c.name.toLowerCase() === lower
-  )) return true;
-
   return false;
 };
-
 
 const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -83,9 +78,9 @@ function WeatherCard({ weather, favorites, setFavorites }) {
       />
       <h3 className="desc">{weather.weather[0].description}</h3>
       <div className="weather-details">
-        <p>🌡 <strong>{weather.main.temp}°C</strong></p>
+        <p>🌡 <strong>{weather.main.temp}°F</strong></p>
         <p>💧 Humidity: {weather.main.humidity}%</p>
-        <p>🌬 Wind: {weather.wind.speed} m/s</p>
+        <p>🌬 Wind: {weather.wind.speed} mph</p>
       </div>
       {user && (
         <button
@@ -153,7 +148,7 @@ function App() {
       setError("");
       setWeather(null);
 
-      const url = `${API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=metric`;
+      const url = `${API_URL}?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_KEY}&units=imperial`;
 
       const response = await fetch(url);
       if (!response.ok) throw new Error("City not found");
