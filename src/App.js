@@ -3,6 +3,7 @@ import "./App.css";
 import { AuthContext } from "./AuthContext";
 import Login from "./Login";
 import cities from "./cities.json";
+import WeatherImage from "./images/WeatherImage.png"
 
 const formatLocation = (name, state, country) => {
   const parts = [name, state?.trim(), country?.trim()].filter(Boolean);
@@ -310,7 +311,7 @@ function App() {
   return (
     <>
       <nav className="navbar">
-        <h1 className="nav-title">Weather App</h1>
+        <h1 className="nav-title">Weather App <img src={WeatherImage} alt="Weather App Logo" style={{ width: '60px', height: '60px', verticalAlign: 'middle'}}/></h1>
         <button className="logout-btn" onClick={logout}>
           Logout
         </button>

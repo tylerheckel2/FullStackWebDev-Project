@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "./AuthContext";
+import WeatherImage from "./images/WeatherImage.png"
 
 export default function Login() {
   const { login, register } = useContext(AuthContext);
@@ -24,6 +25,7 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <img src={WeatherImage} alt="Weather App Logo" width="140"/>
         <h2 className="auth-title">
           {mode === "login" ? "Weather App" : "Create an Account"}
         </h2>
