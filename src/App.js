@@ -401,8 +401,17 @@ function App() {
       <div className="container fade-in">
         <h2 className="welcome">Welcome, {user.username}!</h2>
 
-        <div className="search-box">
+                <div className="search-box">
+          {/* Accessible label for search input */}
+          <label
+            htmlFor="city-search"
+            className="visually-hidden"
+          >
+            Search for a city
+          </label>
+
           <input
+            id="city-search"
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -434,6 +443,7 @@ function App() {
             </div>
           )}
         </div>
+
 
         {loading && <p className="loading">Loading...</p>}
         {error && <p className="error">{error}</p>}
